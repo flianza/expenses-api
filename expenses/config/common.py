@@ -16,15 +16,15 @@ class Common(Configuration):
         'django.contrib.messages',
         'django.contrib.staticfiles',
 
-
         # Third party apps
         'rest_framework',            # utilities for rest apis
         'rest_framework.authtoken',  # token authentication
         'django_filters',            # for filtering rest endpoints
 
         # Your apps
+        'expenses.core',
         'expenses.users',
-
+        'expenses.accounts',
     )
 
     # https://docs.djangoproject.com/en/2.0/topics/http/middleware/
