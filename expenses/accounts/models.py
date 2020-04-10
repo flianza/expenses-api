@@ -7,6 +7,9 @@ class Account(models.Model):
     currency = models.ForeignKey(Currency, on_delete=models.DO_NOTHING)
     initial_balance = models.FloatField(default=0)
 
+    def __str__(self):
+        return '{} - {}'.format(self.name, self.currency.title)
+
     class Meta:
         abstract = True
 

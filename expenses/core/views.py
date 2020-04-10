@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+
 from expenses.core.models import Currency
 from expenses.core.serializers import CurrencySerializer
 

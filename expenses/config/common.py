@@ -25,6 +25,7 @@ class Common(Configuration):
         'expenses.core',
         'expenses.users',
         'expenses.accounts',
+        'expenses.transactions'
     )
 
     # https://docs.djangoproject.com/en/2.0/topics/http/middleware/
