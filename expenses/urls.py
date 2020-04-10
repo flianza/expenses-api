@@ -5,15 +5,21 @@ from django.contrib import admin
 from django.views.generic.base import RedirectView
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
-from .users.views import UserViewSet, UserCreateViewSet
+from expenses.core.views import CurrencyView
+from expenses.users.views import UserViewSet, UserCreateViewSet
+from expenses.accounts.views import AssetAccountView, ExpenseAccountView, RevenueAccountView
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'users', UserCreateViewSet)
+router.register(r'currencies', CurrencyView)
+router.register(r'accounts/asset', AssetAccountView)
+router.register(r'accounts/expense', ExpenseAccountView)
+router.register(r'accounts/revenue', RevenueAccountView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include(router.urls)),
+    path('api/', include(router.urls)),
     path('api-token-auth/', views.obtain_auth_token),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
