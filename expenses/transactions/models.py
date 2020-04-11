@@ -1,6 +1,7 @@
 from django.db import models
 
 from expenses.accounts.models import AssetAccount, ExpenseAccount, RevenueAccount
+from expenses.categories.models import Category
 from expenses.core.models import Currency
 
 
@@ -8,7 +9,8 @@ class Transaction(models.Model):
     name = models.CharField(max_length=100)
     date = models.DateTimeField()
     amount = models.FloatField()
-    currency = models.ForeignKey(Currency, on_delete=models.DO_NOTHING, null=False)
+    currency = models.ForeignKey(Currency, on_delete=models.DO_NOTHING)
+    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True)
 
     class Meta:
         abstract = True
