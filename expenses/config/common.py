@@ -22,6 +22,7 @@ class Common(Configuration):
         'rest_framework',  # utilities for rest apis
         'rest_framework.authtoken',  # token authentication
         'django_filters',  # for filtering rest endpoints
+        'corsheaders',
 
         # Your apps
         'expenses.core',
@@ -33,6 +34,7 @@ class Common(Configuration):
 
     # https://docs.djangoproject.com/en/2.0/topics/http/middleware/
     MIDDLEWARE = (
+        'corsheaders.middleware.CorsMiddleware',
         'django.middleware.security.SecurityMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',
@@ -233,3 +235,5 @@ class Common(Configuration):
         'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
         'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
     }
+
+    CORS_ORIGIN_ALLOW_ALL = True
