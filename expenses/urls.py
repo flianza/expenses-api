@@ -3,12 +3,12 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, re_path, include, reverse_lazy
 from django.views.generic.base import RedirectView
-from rest_framework.authtoken import views
 from rest_framework.routers import DefaultRouter
+from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
 
 from expenses.accounts.views import AssetAccountView, ExpenseAccountView, RevenueAccountView
 from expenses.categories.views import CategoryView
-from expenses.core.views import CurrencyView
+from expenses.core.views import CurrencyView, CustomTokenObtainPairView
 from expenses.transactions.views import TransferTransactionView, ExpenseTransactionView, RevenueTransactionView
 from expenses.users.views import UserViewSet, UserCreateViewSet
 
@@ -28,7 +28,8 @@ urlpatterns = \
     [
         path('admin/', admin.site.urls),
         path('api/', include(router.urls)),
-        path('api-token-auth/', views.obtain_auth_token),
-        path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+        path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
+        path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+        path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
         re_path(r'^$', RedirectView.as_view(url=reverse_lazy('api-root'), permanent=False)),
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

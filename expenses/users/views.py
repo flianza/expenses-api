@@ -4,11 +4,13 @@ from rest_framework.permissions import AllowAny
 from .models import User
 from .permissions import IsUserOrReadOnly
 from .serializers import CreateUserSerializer, UserSerializer
+from ..core.mixins import AuthorizedViewMixin
 
 
 class UserViewSet(mixins.RetrieveModelMixin,
                   mixins.UpdateModelMixin,
-                  viewsets.GenericViewSet):
+                  viewsets.GenericViewSet,
+                  AuthorizedViewMixin):
     """
     Updates and retrieves user accounts
     """
@@ -18,7 +20,8 @@ class UserViewSet(mixins.RetrieveModelMixin,
 
 
 class UserCreateViewSet(mixins.CreateModelMixin,
-                        viewsets.GenericViewSet):
+                        viewsets.GenericViewSet,
+                        AuthorizedViewMixin):
     """
     Creates user accounts
     """
